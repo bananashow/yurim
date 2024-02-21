@@ -1,7 +1,14 @@
+import { Layout } from './components/common/Layout';
+import { Navbar } from './components/common/NavBar';
+import { Router } from './components/common/Router';
+
 export const App = () => {
   return (
-    <>
-      <div>안녕</div>
-    </>
+    <Layout>
+      <>
+        <Navbar />
+        <Router />
+      </>
+    </Layout>
   );
 };

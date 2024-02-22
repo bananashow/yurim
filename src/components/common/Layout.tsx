@@ -7,5 +7,5 @@ export const Layout = ({ children }: { children: JSX.Element }) => {
 const LayoutContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  padding: 32px 60px;
+  padding: 42px 200px;
 `;

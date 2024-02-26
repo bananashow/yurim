@@ -2,19 +2,19 @@ import styled from 'styled-components';
 import { PageLayout } from '../components/common/PageLayout';
 import { BestInterior } from '../components/main/BestInterior';
 import { ImageCarousel } from '../components/common/ImageCarousel';
-import { EmblaOptionsType } from 'embla-carousel';
 import { TEST_SAME_IMAGE_DATA } from '../constants/menu';
 import { Instagram } from '../components/main/Instagram';
+import { KakaoMap } from '../components/main/KakaoMap';
+import { LOCATION } from '../constants/location';
 
 export const Main = () => {
-  const OPTIONS: EmblaOptionsType = {};
-
   return (
     <PageLayout>
       <MainContainer>
-        <ImageCarousel slides={TEST_SAME_IMAGE_DATA} options={OPTIONS} />
+        <ImageCarousel slides={TEST_SAME_IMAGE_DATA} />
         <BestInterior />
         <Instagram />
+        <KakaoMap geoCode={[...LOCATION]} />
       </MainContainer>
     </PageLayout>
   );

@@ -1,0 +1,1 @@
+export const LOCATION = ['35.21203604334998', '129.02687341763846'] as const;

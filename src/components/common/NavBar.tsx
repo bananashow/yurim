@@ -49,6 +49,9 @@ export const Navbar = () => {
           </li>
         ))}
       </ul>
+      <div>
+        <input type="text" placeholder="새롭게 꾸며진 집을 찾아보세요" />
+      </div>
     </NavbarContainer>
   );
 };
@@ -57,10 +60,11 @@ const NavbarContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 36px;
 
   ul {
     display: flex;
-    gap: 24px;
+    gap: 32px;
 
     li {
       font-size: 18px;

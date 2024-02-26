@@ -5,10 +5,17 @@ export const Contact = () => {
   return (
     <PageLayout>
       <ContactContainer>
-        <div>Contact</div>
+        <h2>CONTACT</h2>
       </ContactContainer>
     </PageLayout>
   );
 };
 
-const ContactContainer = styled.section``;
+const ContactContainer = styled.section`
+  h2 {
+    font-size: 24px;
+    margin-top: 64px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+`;

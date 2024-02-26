@@ -1,5 +1,7 @@
 export const NAV_MENU = ['홈', '신축 인테리어', '리모델링', '부분디자인', '현장이야기', 'CONTACT'];
 
+export const PY_CATEGORY = ['전체', '10평대 이하', '20평대', '30평대', '40평대', '50평대 이상'];
+
 export const TEST_IMAGE_DATA = [
   {
     img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',

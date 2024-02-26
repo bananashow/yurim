@@ -23,7 +23,9 @@ export const PartialDesign = () => {
 
 const PartialDesignContainer = styled.section`
   h2 {
-    font-size: 18px;
-    margin-bottom: 24px;
+    font-size: 24px;
+    margin-top: 64px;
+    margin-bottom: 40px;
+    text-align: center;
   }
 `;

@@ -8,9 +8,9 @@ import { SiNaver } from 'react-icons/si';
 import styled from 'styled-components';
 
 const actions = [
-  { icon: <RiKakaoTalkFill color="#FFCD00" />, name: '카카오톡' },
-  { icon: <FaInstagramSquare color="#E4405F" />, name: '인스타그램' },
-  { icon: <SiNaver color="#1EC800" />, name: '네이버 카페' },
+  { icon: <RiKakaoTalkFill style={{ fontSize: '30px' }} color="#FFCD00" />, name: '카카오톡' },
+  { icon: <FaInstagramSquare style={{ fontSize: '26px' }} color="#E4405F" />, name: '인스타그램' },
+  { icon: <SiNaver style={{ fontSize: '20px' }} color="#1EC800" />, name: '블로그' },
 ];
 
 export const Dial = () => {

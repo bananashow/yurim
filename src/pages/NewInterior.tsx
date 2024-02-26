@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { PageLayout } from '../components/common/PageLayout';
 import { InteriorCardList } from '../components/common/InteriorCardList';
+import { PyButtonGroup } from '../components/common/PyButtonGroup';
 
 export const NewInterior = () => {
   const TEST_CARDS = [
@@ -15,6 +16,7 @@ export const NewInterior = () => {
     <PageLayout>
       <NewInteriorContainer>
         <h2>신축 인테리어</h2>
+        <PyButtonGroup />
         <InteriorCardList cardList={TEST_CARDS} />
       </NewInteriorContainer>
     </PageLayout>
@@ -23,7 +25,8 @@ export const NewInterior = () => {
 
 const NewInteriorContainer = styled.section`
   h2 {
-    font-size: 18px;
-    margin-bottom: 24px;
+    font-size: 24px;
+    margin-top: 64px;
+    text-align: center;
   }
 `;

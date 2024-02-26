@@ -96,8 +96,10 @@ const KakaoMapWrap = styled.div`
   }
 
   .address {
-    padding: 12px 0;
+    padding: 26px 0;
+    font-size: 18px;
     text-align: center;
+    font-family: Pretendard-semiBold;
   }
 
   .label {
@@ -111,7 +113,7 @@ const Buttons = styled.div`
 
   & > div {
     font-size: 14px;
-    font-family: 'Pretendard-Bold';
+    font-family: Pretendard-Bold;
     padding: 12px;
     margin: 0 4px;
     width: 200px;

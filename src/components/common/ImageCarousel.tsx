@@ -2,6 +2,9 @@ import useEmblaCarousel from 'embla-carousel-react';
 import styled from 'styled-components';
 import emblaCarouselAutoplay from 'embla-carousel-autoplay';
 import { EmblaOptionsType } from 'embla-carousel';
+import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { theme } from '../../styles/theme';
 
 interface ImageCarouselProps {
   slides: { img: string; title?: string; review?: string }[];
@@ -10,10 +13,26 @@ interface ImageCarouselProps {
 
 export const ImageCarousel = ({ slides, options }: ImageCarouselProps) => {
   const autoplayOptions = {
-    delay: 5000,
+    delay: 3000,
+  };
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [emblaCarouselAutoplay(autoplayOptions)]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const goToSlide = (index: number) => {
+    emblaApi && emblaApi.scrollTo(index);
+    setSelectedIndex(index);
   };
 
-  const [emblaRef] = useEmblaCarousel(options, [emblaCarouselAutoplay(autoplayOptions)]);
+  useEffect(() => {
+    if (emblaApi) {
+      const onSelect = () => {
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+      };
+      emblaApi.on('select', onSelect);
+      return () => emblaApi.off('select', onSelect) as unknown as void;
+    }
+    return;
+  }, [emblaApi]);
 
   return (
     <CarouselWrap>
@@ -31,6 +50,11 @@ export const ImageCarousel = ({ slides, options }: ImageCarouselProps) => {
             ))}
           </div>
         </div>
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+          {slides.map((_, index) => (
+            <DotButton key={index} selected={index === selectedIndex} onClick={() => goToSlide(index)} />
+          ))}
+        </Box>
       </div>
     </CarouselWrap>
   );
@@ -86,4 +110,14 @@ const CarouselWrap = styled.div`
       }
     }
   }
+`;
+
+const DotButton = styled.button<{ selected: boolean }>`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 5px;
+  background-color: ${(props) => (props.selected ? theme.colors.green : '#ccc')};
+  cursor: pointer;
 `;

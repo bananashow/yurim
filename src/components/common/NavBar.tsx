@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { menuState } from '../../store/common';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import { IoSearch } from 'react-icons/io5';
 
 export const Navbar = () => {
   const [currentMenu, setCurrentMenu] = useRecoilState(menuState);
@@ -49,8 +50,11 @@ export const Navbar = () => {
           </li>
         ))}
       </ul>
-      <div>
+      <div className="search">
         <input type="text" placeholder="새롭게 꾸며진 집을 찾아보세요" />
+        <span>
+          <IoSearch />
+        </span>
       </div>
     </NavbarContainer>
   );
@@ -82,6 +86,31 @@ const NavbarContainer = styled.nav`
 
     img {
       width: 240px;
+    }
+  }
+
+  .search {
+    position: relative;
+    input {
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid ${(props) => props.theme.colors.gray};
+    }
+
+    span {
+      position: absolute;
+      top: 4px;
+      right: 3px;
+      svg {
+        font-size: 20px;
+        color: ${(props) => props.theme.colors.green};
+        background-color: #fff;
+        cursor: pointer;
+
+        &:hover {
+          color: ${(props) => props.theme.colors.darkGreen};
+        }
+      }
     }
   }
 `;

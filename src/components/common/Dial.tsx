@@ -19,7 +19,7 @@ export const Dial = () => {
       <Box sx={{ height: 320, display: 'translateZ(0px)', flexGrow: 1 }}>
         <SpeedDial
           ariaLabel="SpeedDial basic example"
-          sx={{ position: 'fixed', bottom: 24, right: 100 }}
+          sx={{ position: 'fixed', bottom: 50, right: 100 }}
           icon={<SpeedDialIcon />}
         >
           {actions.map((action) => (
@@ -32,6 +32,8 @@ export const Dial = () => {
 };
 
 const DialContainer = styled.div`
+  position: fixed;
+
   .MuiFab-primary {
     background-color: ${(props) => props.theme.colors.green};
     &:hover {

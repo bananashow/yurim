@@ -5,7 +5,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 
 interface ImageCarouselProps {
   slides: { img: string; title?: string; review?: string }[];
-  options: EmblaOptionsType;
+  options?: EmblaOptionsType;
 }
 
 export const ImageCarousel = ({ slides, options }: ImageCarouselProps) => {

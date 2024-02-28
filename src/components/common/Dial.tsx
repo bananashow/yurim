@@ -7,13 +7,40 @@ import { FaInstagramSquare } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 import styled from 'styled-components';
 
-const actions = [
-  { icon: <RiKakaoTalkFill style={{ fontSize: '30px' }} color="#FFCD00" />, name: '카카오톡' },
-  { icon: <FaInstagramSquare style={{ fontSize: '26px' }} color="#E4405F" />, name: '인스타그램' },
-  { icon: <SiNaver style={{ fontSize: '20px' }} color="#1EC800" />, name: '블로그' },
-];
-
 export const Dial = () => {
+  const actions = [
+    {
+      icon: <RiKakaoTalkFill style={{ fontSize: '30px' }} color="#FFCD00" onClick={() => newWindow('카카오톡')} />,
+      name: '카카오톡',
+    },
+    {
+      icon: <FaInstagramSquare style={{ fontSize: '26px' }} color="#E4405F" onClick={() => newWindow('인스타그램')} />,
+      name: '인스타그램',
+    },
+    {
+      icon: <SiNaver style={{ fontSize: '20px' }} color="#1EC800" onClick={() => newWindow('블로그')} />,
+      name: '블로그',
+    },
+  ];
+
+  const newWindow = (target: string) => {
+    let targetURL = '';
+
+    switch (target) {
+      case '카카오톡':
+        targetURL = 'https://open.kakao.com/o/gbjqJ7ud';
+        break;
+      case '인스타그램':
+        targetURL = 'https://www.instagram.com/yurimthesup';
+        break;
+      case '블로그':
+        targetURL = 'https://blog.naver.com/yurimthesup';
+        break;
+    }
+
+    window.open(targetURL);
+  };
+
   return (
     <DialContainer>
       <Box sx={{ height: 320, display: 'translateZ(0px)', flexGrow: 1 }}>

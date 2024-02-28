@@ -5,6 +5,8 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { theme } from '../../styles/theme';
+import { useMediaQuery } from 'react-responsive';
+import { device } from '../../styles/media';
 
 interface ImageCarouselProps {
   slides: { img: string; title?: string; review?: string }[];
@@ -91,11 +93,29 @@ const CarouselWrap = styled.div`
 
       p {
         width: 95%;
-        padding: 8px 12px;
+        padding: 4px 12px;
         background-color: ${(props) => props.theme.colors.black}20;
         border-radius: 12px;
         line-height: 24px;
         color: #fff;
+
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      }
+
+      @media ${device.tablet} {
+        h5 {
+          font-size: 16px;
+        }
+
+        p {
+          width: 85%;
+          -webkit-line-clamp: 3;
+        }
       }
     }
 

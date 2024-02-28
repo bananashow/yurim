@@ -11,7 +11,7 @@ export interface Database {
           address: string;
           py: number;
           name: string;
-          phone: number;
+          phone: string;
           budget: number;
           question: string;
         };

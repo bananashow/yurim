@@ -4,8 +4,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { addInquiry } from '../api/contact';
 import { ContactForm } from '../types/contact';
+import { useState } from 'react';
+import { phoneNumberValidation } from '../utils/validation';
 
 export const Contact = () => {
+  const [phone, setPhone] = useState<string>('');
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedPhone = phoneNumberValidation(e);
+    if (formattedPhone) {
+      setPhone(formattedPhone);
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -38,22 +49,28 @@ export const Contact = () => {
           </label>
           <label>
             평수
-            <input {...register('py', { required: true })} placeholder="ex) 25" type="number" />
+            <input {...register('py', { required: true })} placeholder="평수를 입력하세요" type="number" />
             {errors.py && <ErrorMessage>평수를 입력하세요</ErrorMessage>}
           </label>
           <label>
             이름
-            <input {...register('name', { required: true })} placeholder="ex) 김유림" type="text" />
+            <input {...register('name', { required: true })} placeholder="이름을 입력하세요" type="text" />
             {errors.name && <ErrorMessage>이름을 입력하세요</ErrorMessage>}
           </label>
           <label>
             연락처
-            <input {...register('phone', { required: true })} placeholder="ex) 01011112222" type="tel" />
+            <input
+              {...register('phone', { required: true })}
+              placeholder="연락처를 입력하세요"
+              type="text"
+              onChange={handlePhoneChange}
+              value={phone}
+            />
             {errors.phone && <ErrorMessage>연락처를 입력하세요</ErrorMessage>}
           </label>
           <label>
             희망 예산
-            <input {...register('budget', { required: true })} placeholder="ex) 2000만원" type="text" />
+            <input {...register('budget', { required: true })} placeholder="희망 예산을 입력하세요" type="text" />
             {errors.budget && <ErrorMessage>희망 예산을 입력하세요</ErrorMessage>}
           </label>
           <label>

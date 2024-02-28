@@ -93,8 +93,9 @@ const NavbarContainer = styled.nav`
 
   .search {
     position: relative;
+
     input {
-      padding: 6px 8px;
+      padding: 8px;
       border-radius: 4px;
       border: 1px solid ${(props) => props.theme.colors.gray};
     }
@@ -103,8 +104,9 @@ const NavbarContainer = styled.nav`
       position: absolute;
       top: 4px;
       right: 3px;
+
       svg {
-        font-size: 20px;
+        font-size: 23px;
         color: ${(props) => props.theme.colors.green};
         background-color: #fff;
         cursor: pointer;
@@ -112,6 +114,13 @@ const NavbarContainer = styled.nav`
         &:hover {
           color: ${(props) => props.theme.colors.darkGreen};
         }
+      }
+    }
+
+    @media (max-width: 960px) {
+      input {
+        width: 300px;
+        max-width: 200px;
       }
     }
   }

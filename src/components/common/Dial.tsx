@@ -6,6 +6,8 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FaInstagramSquare } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 import styled from 'styled-components';
+import { device } from '../../styles/media';
+import { useMediaQuery } from 'react-responsive';
 
 export const Dial = () => {
   const actions = [
@@ -41,12 +43,14 @@ export const Dial = () => {
     window.open(targetURL);
   };
 
+  const isLaptop = useMediaQuery({ query: device.laptop });
+
   return (
     <DialContainer>
       <Box sx={{ height: 320, display: 'translateZ(0px)', flexGrow: 1 }}>
         <SpeedDial
           ariaLabel="SpeedDial basic example"
-          sx={{ position: 'fixed', bottom: 50, right: 100 }}
+          sx={{ position: 'fixed', bottom: isLaptop ? 30 : 50, right: isLaptop ? 30 : 100 }}
           icon={<SpeedDialIcon />}
         >
           {actions.map((action) => (

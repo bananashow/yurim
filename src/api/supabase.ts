@@ -26,8 +26,8 @@ export interface Database {
   };
 }
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_PROJECT_URL as string;
-const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY as string;
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_PROJECT_URL as string) ?? '';
+const supabaseKey = (import.meta.env.VITE_SUPABASE_API_KEY as string) ?? '';
 const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
 export default supabase;

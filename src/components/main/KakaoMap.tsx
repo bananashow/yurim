@@ -3,6 +3,7 @@ import { BiSolidCopyAlt } from 'react-icons/bi';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { styled } from 'styled-components';
 import { handleCopyAddress } from '../../utils/addressCopy';
+import { device } from '../../styles/media';
 const { kakao } = window;
 
 declare global {
@@ -100,6 +101,10 @@ const KakaoMapWrap = styled.div`
     font-size: 18px;
     text-align: center;
     font-family: Pretendard-semiBold;
+
+    @media ${device.tablet} {
+      font-size: 14px;
+    }
   }
 
   .label {

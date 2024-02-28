@@ -4,52 +4,43 @@ import { useRecoilState } from 'recoil';
 import { menuState } from '../../store/common';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import logo_m from '../../assets/logo_mobile.png';
 import { IoSearch } from 'react-icons/io5';
+import { useMediaQuery } from 'react-responsive';
+import { device } from '../../styles/media';
+import { HamburgerMenu } from './HamburgerMenu';
+import { menuNavigation } from '../../utils/menu';
 
 export const Navbar = () => {
   const [currentMenu, setCurrentMenu] = useRecoilState(menuState);
   const navigation = useNavigate();
 
+  const isLaptop = useMediaQuery({ query: device.laptop });
+  const is960px = useMediaQuery({ maxWidth: 960 });
+
   const handleMenu = (menu: string) => {
     setCurrentMenu(menu);
-    switch (menu) {
-      case '홈':
-        navigation('/');
-        break;
-      case '신축 인테리어':
-        navigation('/new-interior');
-        break;
-      case '리모델링':
-        navigation('/remodeling');
-        break;
-      case '부분디자인':
-        navigation('/partial-design');
-        break;
-      case '현장이야기':
-        navigation('/story');
-        break;
-      case 'CONTACT':
-        navigation('/contact');
-        break;
-
-      default:
-        navigation('/');
-        break;
-    }
+    navigation(menuNavigation(menu));
   };
 
   return (
     <NavbarContainer>
       <div onClick={() => handleMenu('홈')} role="button" className="logo">
-        <img src={logo} alt="logo" />
+        <img src={isLaptop ? logo_m : logo} alt="logo" />
       </div>
-      <ul>
-        {NAV_MENU.map((menu, idx) => (
-          <li key={idx} onClick={() => handleMenu(menu)} className={menu === currentMenu ? 'is--active' : ''}>
-            {menu}
-          </li>
-        ))}
-      </ul>
+      {is960px ? (
+        <HamburgerMenu />
+      ) : (
+        <div>
+          <ul>
+            {NAV_MENU.map((menu, idx) => (
+              <li key={idx} onClick={() => handleMenu(menu)} className={menu === currentMenu ? 'is--active' : ''}>
+                {menu}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="search">
         <input type="text" placeholder="새롭게 꾸며진 집을 찾아보세요" />
         <span>
@@ -66,6 +57,11 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   gap: 36px;
 
+  @media (max-width: 960px) {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+  }
+
   ul {
     display: flex;
     gap: 32px;
@@ -74,6 +70,12 @@ const NavbarContainer = styled.nav`
       font-size: 18px;
       font-family: Pretendard-SemiBold;
       cursor: pointer;
+    }
+
+    @media (max-width: 1500px) {
+      & li {
+        font-size: 16px;
+      }
     }
   }
 
@@ -85,7 +87,7 @@ const NavbarContainer = styled.nav`
     cursor: pointer;
 
     img {
-      width: 240px;
+      max-width: 240px;
     }
   }
 

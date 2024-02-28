@@ -63,6 +63,7 @@ export const Dial = () => {
 };
 
 const DialContainer = styled.div`
+  z-index: 9999;
   position: fixed;
 
   .MuiFab-primary {

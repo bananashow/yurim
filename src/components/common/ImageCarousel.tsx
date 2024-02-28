@@ -5,7 +5,6 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { theme } from '../../styles/theme';
-import { useMediaQuery } from 'react-responsive';
 import { device } from '../../styles/media';
 
 interface ImageCarouselProps {

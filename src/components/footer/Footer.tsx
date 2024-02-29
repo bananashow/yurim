@@ -77,6 +77,7 @@ const FooterContainer = styled.footer`
   color: #fff;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+  padding: 48px 160px;
 
   @media only screen and (max-width: 1530px) {
     padding: 48px 120px;

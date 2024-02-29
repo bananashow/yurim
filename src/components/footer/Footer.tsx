@@ -11,7 +11,7 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <LeftSection>
-        <div className="hospital-info">
+        <div className="yurim-info">
           <div className="top-list">
             <div>개인정보 처리방침</div>
             <span className="bar">|</span>
@@ -22,7 +22,7 @@ export const Footer = () => {
           <div className="name">
             <strong>유림 더 숲 인테리어</strong>
           </div>
-          <div className="info">
+          <div className="description">
             <div>(46562) 부산 북구 만덕3로 27 (만덕동) 1층</div>
             <div>TEL : 010-9151-7941</div>
             <div>E-Mail : sharon1966@hanmail.net</div>
@@ -56,7 +56,7 @@ export const Footer = () => {
           <div>대표 문의전화</div>
           <div className="tel-number">010.9151.7941</div>
         </div>
-        <div className="time">
+        <div className="description">
           <div>
             <h3>WORK</h3>
             <div>- 인테리어 디자이너</div>
@@ -122,7 +122,7 @@ const LeftSection = styled.section`
 
   .top-list {
     display: flex;
-    gap: 4px;
+    gap: 8px;
     font-size: 14px;
 
     div {
@@ -155,7 +155,7 @@ const LeftSection = styled.section`
     }
   }
 
-  .info {
+  .description {
     color: #a5a5a5;
     font-size: 13px;
   }
@@ -178,15 +178,10 @@ const LeftSection = styled.section`
     }
 
     .name {
-      font-size: 12px;
       font-size: 14px;
       img {
         width: 12px;
       }
-    }
-
-    .info {
-      font-size: 12px;
     }
   }
 `;
@@ -206,7 +201,7 @@ const RightSection = styled.section`
     }
   }
 
-  .time {
+  .description {
     font-size: 13px;
     display: flex;
     gap: 48px;

@@ -4,6 +4,7 @@ import { SnsButton } from './SnsButton';
 import { BsInstagram } from 'react-icons/bs';
 import { SiNaver } from 'react-icons/si';
 import { RiKakaoTalkFill } from 'react-icons/ri';
+import { device } from '../../styles/media';
 
 export const Footer = () => {
   const navigation = useNavigate();
@@ -19,8 +20,7 @@ export const Footer = () => {
             <div>(46562) 부산 북구 만덕3로 27 (만덕동) 1층</div>
             <div>TEL : 010-9151-7941</div>
             <div>E-Mail : sharon1966@hanmail.net</div>
-            <div>사업자등록번호 : 895-02-02282</div>
-            <div>대표자명 : 이희연</div>
+            <div>사업자등록번호 : 895-02-02282 | 대표자명 : 이희연</div>
           </div>
         </div>
 
@@ -77,30 +77,27 @@ const FooterContainer = styled.footer`
   color: #fff;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  padding: 48px 160px;
+  padding: 42px 200px;
 
-  @media only screen and (max-width: 1530px) {
-    padding: 48px 120px;
+  @media ${device.laptop} {
+    padding: 42px 42px;
   }
 
-  @media only screen and (max-width: 1250px) {
-    padding: 48px 50px;
-  }
-
-  @media only screen and (max-width: 900px) {
+  @media ${device.tablet} {
+    padding: 12px;
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  @media only screen and (max-width: 556px) {
-    padding: 32px 16px;
-    justify-items: center;
+  @media ${device.mobile} {
+    padding: 0 4px;
   }
 
   .line {
     width: 1px;
     height: 100%;
     background-color: #555555;
-    margin: 0 48px;
+    margin: 0 24px;
   }
 `;
 
@@ -113,12 +110,11 @@ const LeftSection = styled.section`
   justify-content: space-between;
 
   .name {
-    margin-top: 14px;
-    padding: 16px 0;
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 18px;
+    padding: 12px 0;
 
     img {
       width: 25px;
@@ -133,38 +129,18 @@ const LeftSection = styled.section`
   .sns-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 16px;
-
-    @media only screen and (max-width: 900px) {
-      padding: 24px 0;
-    }
-  }
-
-  @media only screen and (max-width: 556px) {
-    width: 100%;
-
-    .top-list {
-      font-size: 12px;
-    }
-
-    .name {
-      font-size: 14px;
-      img {
-        width: 12px;
-      }
-    }
+    padding: 12px 0;
   }
 `;
 
 const RightSection = styled.section`
   h3 {
-    margin-top: 12px;
     font-size: 16px;
     font-family: 'Pretendard-SemiBold';
   }
 
   .tel {
-    margin-top: 32px;
+    padding: 12px 0;
 
     .tel-number {
       font-size: 32px;
@@ -178,17 +154,12 @@ const RightSection = styled.section`
     display: flex;
     gap: 48px;
 
-    h3 {
-      margin-bottom: 4px;
-    }
-
     & > div > div {
       color: #a5a5a5;
     }
   }
 
   .admin {
-    margin-top: 12px;
     font-size: 12px;
     color: #777777;
     cursor: pointer;

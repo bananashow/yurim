@@ -12,13 +12,6 @@ export const Footer = () => {
     <FooterContainer>
       <LeftSection>
         <div className="yurim-info">
-          <div className="top-list">
-            <div>개인정보 처리방침</div>
-            <span className="bar">|</span>
-            <div>이용 약관</div> <span className="bar">|</span>
-            <div>고객 불편 사항</div>
-          </div>
-
           <div className="name">
             <strong>유림 더 숲 인테리어</strong>
           </div>
@@ -82,10 +75,8 @@ const FooterContainer = styled.footer`
   background-color: ${(props) => props.theme.colors.black};
   width: 100%;
   color: #fff;
-  font-size: 16px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  padding: 48px 160px;
 
   @media only screen and (max-width: 1530px) {
     padding: 48px 120px;
@@ -119,28 +110,6 @@ const LeftSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  .top-list {
-    display: flex;
-    gap: 8px;
-    font-size: 14px;
-
-    div {
-      cursor: pointer;
-    }
-
-    div:first-child {
-      color: ${(props) => props.theme.colors.green};
-    }
-
-    div:last-child {
-      border: none;
-    }
-
-    .bar {
-      color: #555555;
-    }
-  }
 
   .name {
     margin-top: 14px;
@@ -195,9 +164,11 @@ const RightSection = styled.section`
 
   .tel {
     margin-top: 32px;
+
     .tel-number {
       font-size: 32px;
       font-family: 'Pretendard-ExtraBold';
+      color: ${(props) => props.theme.colors.green};
     }
   }
 

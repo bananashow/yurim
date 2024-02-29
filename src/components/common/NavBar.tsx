@@ -60,6 +60,7 @@ const NavbarContainer = styled.nav`
   @media (max-width: 960px) {
     display: grid;
     grid-template-columns: auto 1fr auto;
+    gap: 0;
   }
 
   ul {

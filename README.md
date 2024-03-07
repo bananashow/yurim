@@ -1,3 +1,6 @@
+# 배포 링크
+https://yurim.vercel.app/
+
 
 # Commit message rule
 - feat : 새로운 기능의 추가

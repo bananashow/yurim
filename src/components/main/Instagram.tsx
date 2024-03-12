@@ -17,7 +17,7 @@ const InstagramContainer = styled.section`
 
   iframe {
     width: 100%;
-    height: 500px;
+    min-height: 500px;
     max-height: fit-content;
     border: 1px solid ${(props) => props.theme.colors.gray};
   }

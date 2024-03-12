@@ -5,6 +5,7 @@ import { Remodeling } from '../../pages/Remodeling';
 import { PartialDesign } from '../../pages/PartialDesign';
 import { Story } from '../../pages/Story';
 import { Contact } from '../../pages/Contact';
+import { SignIn } from '../../pages/SignIn';
 
 export const Router = () => {
   return (
@@ -15,6 +16,7 @@ export const Router = () => {
       <Route path="/partial-design" element={<PartialDesign />} />
       <Route path="/story" element={<Story />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/signin" element={<SignIn />} />
     </Routes>
   );
 };

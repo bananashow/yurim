@@ -32,6 +32,7 @@ export const Contact = () => {
   const onSubmit: SubmitHandler<ContactForm> = (data) => {
     if (confirm('견적을 요청할까요?')) {
       contactMutaion.mutate(data);
+      setPhone('');
     } else {
       return false;
     }

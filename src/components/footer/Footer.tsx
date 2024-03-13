@@ -63,7 +63,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="admin" onClick={() => navigation('/signin')}>
+        <div className="admin" onClick={() => navigation('/admin')}>
           관리자 페이지
         </div>
       </RightSection>

@@ -6,3 +6,8 @@ export interface ContactForm {
   budget: number;
   question?: string;
 }
+
+export interface InquiryList extends ContactForm {
+  id: number;
+  created_at: string;
+}

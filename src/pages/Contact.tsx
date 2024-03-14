@@ -6,6 +6,8 @@ import { addInquiry } from '../api/contact';
 import { ContactForm } from '../types/contact';
 import { useState } from 'react';
 import { phoneNumberValidation } from '../utils/validation';
+import { queryClient } from '../api/queryClient';
+import { QUERY_KEY } from '../constants/api';
 
 export const Contact = () => {
   const [phone, setPhone] = useState<string>('');
@@ -26,7 +28,12 @@ export const Contact = () => {
 
   const contactMutaion = useMutation({
     mutationFn: addInquiry,
-    onSuccess: () => reset(),
+    onSuccess: () => {
+      reset();
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.GET_INQUIRY_LIST],
+      });
+    },
   });
 
   const onSubmit: SubmitHandler<ContactForm> = (data) => {
@@ -41,7 +48,7 @@ export const Contact = () => {
   return (
     <PageLayout>
       <ContactContainer>
-        <h2>CONTACT</h2>
+        <h2>견적 요청</h2>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <label>
             간단한 주소

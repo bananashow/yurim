@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { PageLayout } from '../components/common/PageLayout';
-import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
+import { Carousel } from '../components/admin/Carousel';
+import { Post } from '../components/admin/Post';
+import { Inquiry } from '../components/admin/Inquiry';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -20,11 +23,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -42,19 +41,23 @@ export const Admin = () => {
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="메인페이지 수정" />
-              <Tab label="게시글 등록" />
-              <Tab label="문의글" />
+              <Tab label="캐러셀 관리" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
+              <Tab label="게시물 관리" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
+              <Tab label="문의글" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
+              <Tab label="비밀번호 변경" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            메인페이지 수정
+            <Carousel />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            게시글 등록
+            <Post />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            문의글
+            <Inquiry />
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={3}>
+            <div>비밀번호 변경쓰</div>
           </CustomTabPanel>
         </Box>
       </AdminContainer>
@@ -67,5 +70,9 @@ const AdminContainer = styled.section`
     font-size: 24px;
     margin-top: 64px;
     text-align: center;
+  }
+
+  .MuiBox-root {
+    margin-top: 24px;
   }
 `;

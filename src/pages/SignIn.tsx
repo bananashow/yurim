@@ -23,6 +23,7 @@ export const SignIn = () => {
       sessionStorage.setItem('access_token', data?.session?.access_token || '');
       setSignedInState(true);
     },
+    onError: () => alert('아이디와 비밀번호를 확인해 주세요!'),
   });
 
   const onSubmit: SubmitHandler<SignInForm> = (data) => {

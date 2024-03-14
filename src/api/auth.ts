@@ -8,7 +8,7 @@ export const signIn = async (formData: SignInForm) => {
   });
   if (error) {
     console.error('supabase error:', error.message);
-    return null;
+    throw error;
   }
   return data;
 };

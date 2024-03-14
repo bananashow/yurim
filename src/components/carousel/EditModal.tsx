@@ -38,7 +38,7 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     const review = target.review.value;
 
     if (selectedData.type === 'edit') {
-      // 수정 처리
+      editMutation.mutate({ title, review, newImageUrl });
     } else {
       AddMutation.mutate({ title, review, newImageUrl });
     }

@@ -6,9 +6,10 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { theme } from '../../styles/theme';
 import { device } from '../../styles/media';
+import { CarouselData } from '../../types/carousel';
 
 interface ImageCarouselProps {
-  slides: { img: string; title?: string; review?: string }[];
+  slides: CarouselData[];
   options?: EmblaOptionsType;
 }
 

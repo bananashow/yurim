@@ -2,12 +2,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { deleteInquiry, getInquiryList } from '../../api/contact';
 import { QUERY_KEY } from '../../constants/api';
-import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material';
+import { Accordion, AccordionActions, AccordionDetails, AccordionSummary } from '@mui/material';
 import { FaAngleDown } from 'react-icons/fa6';
 import { formatDateTime } from '../../utils/format';
-import { MdDeleteSweep } from 'react-icons/md';
 import { InquiryList } from '../../types/contact';
 import { queryClient } from '../../api/queryClient';
+import { DeleteButton } from '../common/DeleteButton';
 
 export const Inquiry = () => {
   const { data: inquiryList } = useQuery({
@@ -51,9 +51,7 @@ export const Inquiry = () => {
               </div>
             </AccordionDetails>
             <AccordionActions>
-              <Button onClick={() => handleDelete(inquiry.id)}>
-                <MdDeleteSweep />
-              </Button>
+              <DeleteButton handleDelete={() => handleDelete(inquiry.id)} />
             </AccordionActions>
           </Accordion>
         );
@@ -96,15 +94,6 @@ const InquiryContainer = styled.section`
       font-family: Pretendard-Bold;
       color: ${(props) => props.theme.colors.darkGreen};
       margin-right: 6px;
-    }
-  }
-
-  button {
-    font-size: 24px;
-    color: ${(props) => props.theme.colors.gray};
-
-    &:hover {
-      color: ${(props) => props.theme.colors.darkGreen};
     }
   }
 `;

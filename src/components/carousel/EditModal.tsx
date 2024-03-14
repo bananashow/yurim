@@ -22,6 +22,7 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     setModalOpen(false);
   };
 
+  // TODO : 리스트 업데이트
   const AddMutation = useMutation({
     mutationFn: addCarousel,
     onSuccess: (data) => console.log(data),
@@ -39,10 +40,11 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
 
     if (selectedData.type === 'edit') {
       editMutation.mutate({ title, review, newImageUrl });
+      // TODO : 아이디값 같이 넘겨야 함
     } else {
       AddMutation.mutate({ title, review, newImageUrl });
     }
-    // handleClose();
+    handleClose();
   };
 
   // 이미지 파일

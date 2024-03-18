@@ -4,3 +4,8 @@ export const formatDateTime = (inputDateTime: string) => {
   const time = `${dateTime.getHours()}:${dateTime.getMinutes() < 10 ? '0' : ''}${dateTime.getMinutes()}`;
   return `${date} ${time}`;
 };
+
+export const formatImageFileName = (url: string) => {
+  const parts = url.split('/');
+  return parts[parts.length - 1];
+};

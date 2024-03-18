@@ -3,8 +3,10 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { CarouselData } from '../../types/carousel';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
-import { addCarousel, editCarousel, imageUpload } from '../../api/carousel';
+import { addCarousel, editCarousel, imageDelete, imageUpload } from '../../api/carousel';
 import { FaPlus } from 'react-icons/fa6';
+import { queryClient } from '../../api/queryClient';
+import { QUERY_KEY } from '../../constants/api';
 
 interface EditModalProps {
   isOpen: boolean;
@@ -15,21 +17,25 @@ interface EditModalProps {
 export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [newImageUrl, setNewImageUrl] = useState<string>('');
-
-  console.log(selectedData.type);
+  console.log(newImageUrl);
 
   const handleClose = () => {
     setModalOpen(false);
+    deleteStorageImageMutation.mutate(newImageUrl);
   };
 
-  // TODO : 리스트 업데이트
   const AddMutation = useMutation({
     mutationFn: addCarousel,
-    onSuccess: (data) => console.log(data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_CAROUSEL_DATA] }),
   });
 
   const editMutation = useMutation({
     mutationFn: editCarousel,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_CAROUSEL_DATA] }),
+  });
+
+  const deleteStorageImageMutation = useMutation({
+    mutationFn: imageDelete,
   });
 
   const handleEditOrAdd = (e: React.FormEvent) => {
@@ -39,8 +45,8 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     const review = target.review.value;
 
     if (selectedData.type === 'edit') {
-      editMutation.mutate({ title, review, newImageUrl });
-      // TODO : 아이디값 같이 넘겨야 함
+      deleteStorageImageMutation.mutate(selectedData.img);
+      editMutation.mutate({ id: selectedData.id, title, review, newImageUrl });
     } else {
       AddMutation.mutate({ title, review, newImageUrl });
     }
@@ -92,10 +98,10 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
           </DialogTitle>
           <DialogContent>
             <StyledImageContainer onClick={handleImageClick}>
-              {selectedData.img ? (
-                <StyledImage src={selectedData.img} alt="Uploaded image" />
-              ) : newImageUrl ? (
+              {newImageUrl ? (
                 <StyledImage src={newImageUrl} alt="Uploaded image" />
+              ) : selectedData.img ? (
+                <StyledImage src={selectedData.img} alt="Uploaded image" />
               ) : (
                 <div className="attachment">
                   <span>

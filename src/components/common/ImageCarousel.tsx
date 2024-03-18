@@ -121,6 +121,7 @@ const CarouselWrap = styled.div`
 
     .embla__slide__img {
       width: 320px;
+      height: 500px;
       display: block;
       object-fit: cover;
       cursor: pointer;

@@ -1,7 +1,13 @@
 export interface CardInfo {
   id: number;
-  type: string;
-  img: string;
+  created_at: string;
+  main_title: string;
+  project: string;
+  site: string;
+  area: number;
+  keyword: string;
   title: string;
-  py: string;
+  content: string;
+  images: string[];
+  type?: 'edit' | 'add';
 }

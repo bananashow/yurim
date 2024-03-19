@@ -2,52 +2,22 @@ import styled from 'styled-components';
 import { PageLayout } from '../components/common/PageLayout';
 import { InteriorCardList } from '../components/common/InteriorCardList';
 import { PyButtonGroup } from '../components/common/PyButtonGroup';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEY, TABLE } from '../constants/api';
+import { getInteriorDatas } from '../api/homeInterior';
 
 export const StoreInterior = () => {
-  const TEST_CARDS = [
-    {
-      id: 1,
-      type: 'store',
-      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-      title: '김해 삼계동 부영아파트',
-      py: '24',
-    },
-    {
-      id: 2,
-      type: 'store',
-      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-      title: '김해 삼계동 부영아파트',
-      py: '24',
-    },
-    {
-      id: 3,
-      type: 'store',
-      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-      title: '김해 삼계동 부영아파트',
-      py: '24',
-    },
-    {
-      id: 4,
-      type: 'store',
-      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-      title: '김해 삼계동 부영아파트',
-      py: '24',
-    },
-    {
-      id: 5,
-      type: 'store',
-      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-      title: '김해 삼계동 부영아파트',
-      py: '24',
-    },
-  ];
+  const { data: interiorList } = useQuery({
+    queryKey: [QUERY_KEY.GET_STORE_INTERIOR],
+    queryFn: () => getInteriorDatas(TABLE.STORE_INTERIOR),
+  });
 
   return (
     <PageLayout>
       <StoreInteriorContainer>
         <h2>상업 공간 시공</h2>
         <PyButtonGroup />
-        <InteriorCardList cardList={TEST_CARDS} />
+        <InteriorCardList cardList={interiorList ?? []} />
       </StoreInteriorContainer>
     </PageLayout>
   );

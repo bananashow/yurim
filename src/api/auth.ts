@@ -7,7 +7,7 @@ export const signIn = async (formData: SignInForm) => {
     password: formData.password,
   });
   if (error) {
-    console.error('supabase error:', error.message);
+    console.error('로그인 에러:', error.message);
     throw error;
   }
   return data;

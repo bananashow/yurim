@@ -64,11 +64,20 @@ export const Carousel = () => {
   return (
     <>
       <CarouselContainer>
+        <Card sx={{ maxWidth: 345, width: '100%' }} className="card" onClick={handleAdd}>
+          <CardActionArea sx={{ height: '100%', textAlign: 'center' }}>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                <FaPlus />
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
         {carouselData?.map((data) => {
           return (
             <Card sx={{ maxWidth: 345 }} key={data.id} onClick={() => handleCardClick(data)}>
               <CardActionArea>
-                <CardMedia component="img" height="200" image={data.img} alt="green iguana" />
+                <CardMedia component="img" height="200" image={data.img} alt="인테리어" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div" className="title">
                     {data.title}
@@ -86,15 +95,6 @@ export const Carousel = () => {
             </Card>
           );
         })}
-        <Card sx={{ maxWidth: 345, width: '100%' }} className="card" onClick={handleAdd}>
-          <CardActionArea sx={{ height: '100%', textAlign: 'center' }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                <FaPlus />
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
       </CarouselContainer>
       {modalIsOpen && <EditModal isOpen={modalIsOpen} setModalOpen={setModalOpen} selectedData={selectedData} />}
     </>

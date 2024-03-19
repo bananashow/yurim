@@ -4,30 +4,33 @@ import Typography from '@mui/material/Typography';
 import { Card, CardActionArea } from '@mui/material';
 import styled from 'styled-components';
 import { CardInfo } from '../../types/card';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export const InteriorCard = ({ id, type, img, title, py }: CardInfo) => {
+export const InteriorCard = (cardProps: CardInfo) => {
+  const navigation = useNavigate();
+  const location = useLocation();
+
+  const { id, main_title, area, images } = cardProps;
+
   const handleCardClick = () => {
-    console.log(id, type);
+    navigation(`${location.pathname}/${id}`);
   };
 
   return (
     <CardWrap>
-      <Link to={`/${type}/${id}`}>
-        <Card onClick={() => handleCardClick()}>
-          <CardActionArea>
-            <CardMedia component="img" height="400" image={img} alt="interior" />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div" className="title">
-                {title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" className="py">
-                {py}py
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Link>
+      <Card onClick={() => handleCardClick()}>
+        <CardActionArea>
+          <CardMedia component="img" height="400" image={images[0]} alt="interior" />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div" className="title">
+              {main_title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" className="py">
+              {area}py
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </CardWrap>
   );
 };

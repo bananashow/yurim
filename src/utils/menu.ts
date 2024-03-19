@@ -8,10 +8,10 @@ export const menuNavigation = (menu: string) => {
       path = '/';
       break;
     case NAV_MENU[1]:
-      path = '/new-interior';
+      path = '/home';
       break;
     case NAV_MENU[2]:
-      path = '/remodeling';
+      path = '/store';
       break;
     case NAV_MENU[3]:
       path = '/partial-design';

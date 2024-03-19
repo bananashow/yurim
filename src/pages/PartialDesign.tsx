@@ -14,7 +14,7 @@ export const PartialDesign = () => {
   return (
     <PageLayout>
       <PartialDesignContainer>
-        <h2>부분 디자인</h2>
+        <h2>포인트 디자인</h2>
         <InteriorCardList cardList={TEST_CARDS} />
       </PartialDesignContainer>
     </PageLayout>

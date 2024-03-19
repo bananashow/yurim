@@ -44,7 +44,6 @@ export const Admin = () => {
               <Tab label="캐러셀 관리" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
               <Tab label="게시물 관리" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
               <Tab label="문의글" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
-              <Tab label="비밀번호 변경" sx={{ fontFamily: 'Pretendard-SemiBold', fontSize: '16px' }} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
@@ -55,9 +54,6 @@ export const Admin = () => {
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
             <Inquiry />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={3}>
-            <div>비밀번호 변경쓰</div>
           </CustomTabPanel>
         </Box>
       </AdminContainer>

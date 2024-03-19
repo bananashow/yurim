@@ -1,4 +1,4 @@
-export const NAV_MENU = ['홈', '신축 인테리어', '리모델링', '부분디자인', '현장이야기', 'CONTACT'];
+export const NAV_MENU = ['홈', '주거 공간 시공', '상업 공간 시공', '포인트 디자인', '현장 스토리', 'CONTACT'];
 
 export const PY_CATEGORY = ['전체', '10평대 이하', '20평대', '30평대', '40평대', '50평대 이상'];
 

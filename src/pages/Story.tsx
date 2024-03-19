@@ -5,7 +5,7 @@ export const Story = () => {
   return (
     <PageLayout>
       <StoryContainer>
-        <h2>현장 이야기</h2>
+        <h2>현장 스토리</h2>
       </StoryContainer>
     </PageLayout>
   );

@@ -5,11 +5,41 @@ import { PyButtonGroup } from '../components/common/PyButtonGroup';
 
 export const HomeInterior = () => {
   const TEST_CARDS = [
-    { img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62', title: '김해 삼계동 부영아파트', py: '24' },
-    { img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62', title: '김해 삼계동 부영아파트', py: '24' },
-    { img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62', title: '김해 삼계동 부영아파트', py: '24' },
-    { img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62', title: '김해 삼계동 부영아파트', py: '24' },
-    { img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62', title: '김해 삼계동 부영아파트', py: '24' },
+    {
+      id: 1,
+      type: 'home',
+      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      title: '김해 삼계동 부영아파트',
+      py: '24',
+    },
+    {
+      id: 2,
+      type: 'home',
+      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      title: '김해 삼계동 부영아파트',
+      py: '24',
+    },
+    {
+      id: 3,
+      type: 'home',
+      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      title: '김해 삼계동 부영아파트',
+      py: '24',
+    },
+    {
+      id: 4,
+      type: 'home',
+      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      title: '김해 삼계동 부영아파트',
+      py: '24',
+    },
+    {
+      id: 5,
+      type: 'home',
+      img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      title: '김해 삼계동 부영아파트',
+      py: '24',
+    },
   ];
 
   return (

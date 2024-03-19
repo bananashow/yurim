@@ -14,7 +14,7 @@ export const menuNavigation = (menu: string) => {
       path = '/store';
       break;
     case NAV_MENU[3]:
-      path = '/partial-design';
+      path = '/point';
       break;
     case NAV_MENU[4]:
       path = '/story';

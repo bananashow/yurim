@@ -6,7 +6,7 @@ export const InteriorCardList = ({ cardList }: { cardList: CardInfo[] }) => {
   return (
     <CardListWrap>
       {cardList.map((card: CardInfo) => (
-        <InteriorCard img={card.img} title={card.title} py={card.py} />
+        <InteriorCard {...card} />
       ))}
     </CardListWrap>
   );

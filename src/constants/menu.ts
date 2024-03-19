@@ -1,6 +1,6 @@
-export const NAV_MENU = ['홈', '주거 공간 시공', '상업 공간 시공', '포인트 디자인', '현장 스토리', 'CONTACT'];
+export const NAV_MENU = ['홈', '주거 공간', '상업 공간', '포인트 디자인', '현장 스토리', 'CONTACT'];
 
-export const PY_CATEGORY = ['전체', '10평대 이하', '20평대', '30평대', '40평대', '50평대 이상'];
+export const PY_CATEGORY = ['전체', '20평대 미만', '20평대', '30평대', '40평대', '50평대 이상'];
 
 export const TEST_IMAGE_DATA = [
   {

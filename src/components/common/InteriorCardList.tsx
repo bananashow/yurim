@@ -6,7 +6,7 @@ export const InteriorCardList = ({ cardList }: { cardList: CardInfo[] }) => {
   return (
     <CardListWrap>
       {cardList.map((card: CardInfo) => (
-        <InteriorCard {...card} />
+        <InteriorCard key={card.id} {...card} />
       ))}
     </CardListWrap>
   );

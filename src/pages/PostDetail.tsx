@@ -21,8 +21,8 @@ export const PostDetail = () => {
     <PageLayout>
       <PostDetailContainer>
         <ImageSection>
-          {data?.images?.map((image: string) => (
-            <img src={image} alt="인테리어" />
+          {data?.images?.map((image: string, idx: number) => (
+            <img src={image} key={idx} alt="인테리어" />
           ))}
         </ImageSection>
         <InfoSection>

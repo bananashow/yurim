@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { InteriorCard } from './InteriorCard';
 import { CardInfo } from '../../types/card';
+import { device } from '../../styles/media';
 
 export const InteriorCardList = ({ cardList }: { cardList: CardInfo[] }) => {
   return (
@@ -16,4 +17,8 @@ const CardListWrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+
+  @media ${device.tablet} {
+    grid-template-columns: 1fr;
+  }
 `;

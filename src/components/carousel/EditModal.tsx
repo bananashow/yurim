@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { CarouselData } from '../../types/carousel';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
-import { addCarousel, editCarousel, imageDelete, imageUpload } from '../../api/carousel';
+import { addCarousel, editCarousel, imageUpload } from '../../api/carousel';
 import { FaPlus } from 'react-icons/fa6';
 import { queryClient } from '../../api/queryClient';
 import { QUERY_KEY } from '../../constants/api';
@@ -20,7 +20,9 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
 
   const handleClose = () => {
     setModalOpen(false);
-    deleteStorageImageMutation.mutate(newImageUrl);
+    if (selectedData.img !== newImageUrl) {
+      // deleteStorageImageMutation.mutate(newImageUrl);
+    }
   };
 
   const AddMutation = useMutation({
@@ -33,9 +35,10 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_CAROUSEL_DATA] }),
   });
 
-  const deleteStorageImageMutation = useMutation({
-    mutationFn: imageDelete,
-  });
+  // TODO : 수정 처리 시 이전 스토리지 이미지 삭제 처리 필요
+  // const deleteStorageImageMutation = useMutation({
+  //   mutationFn: imageDelete,
+  // });
 
   const handleEditOrAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +47,7 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     const review = target.review.value;
 
     if (selectedData.type === 'edit') {
-      deleteStorageImageMutation.mutate(selectedData.img);
+      // deleteStorageImageMutation.mutate(selectedData.img);
       editMutation.mutate({ id: selectedData.id, title, review, newImageUrl });
     } else {
       AddMutation.mutate({ title, review, newImageUrl });

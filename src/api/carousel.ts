@@ -63,8 +63,6 @@ export const imageUpload = async (file: File) => {
     contentType: file.type,
   });
 
-  console.log(data);
-
   if (error) {
     console.error('Error uploading image:', error.message);
     throw error;

@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { CarouselData } from '../../types/carousel';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { deleteCarousel, getCarouselData, imageDelete } from '../../api/carousel';
-import { QUERY_KEY } from '../../constants/api';
+import { deleteCarousel, getCarouselData } from '../../api/carousel';
+import { QUERY_KEY, STORAGE } from '../../constants/api';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import { DeleteButton } from '../common/DeleteButton';
 import { useState } from 'react';
 import { EditModal } from '../carousel/EditModal';
 import { FaPlus } from 'react-icons/fa6';
 import { queryClient } from '../../api/queryClient';
+import { imageDelete } from '../../api/image';
 
 export const Carousel = () => {
   const [modalIsOpen, setModalOpen] = useState<boolean>(false);
@@ -37,7 +38,7 @@ export const Carousel = () => {
 
   const handleDelete = (data: CarouselData) => {
     if (confirm('정말 삭제할까요?')) {
-      deleteStorageImageMutation.mutate(data.img);
+      deleteStorageImageMutation.mutate({ url: data.img, storage: STORAGE.CAROUSEL });
       deleteMutation.mutate(data.id);
     } else {
       return false;

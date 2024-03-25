@@ -30,3 +30,7 @@ export const getTable = (type: string) => {
   }
   return table;
 };
+
+export const pyToSquareMeter = (py: number) => {
+  return (py * 3.305785).toFixed(2);
+};

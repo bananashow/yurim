@@ -16,9 +16,10 @@ import { FaPlus } from 'react-icons/fa6';
 import { useState } from 'react';
 import { PostModal } from '../post/PostModal';
 import { CardInfo } from '../../types/card';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { QUERY_KEY, TABLE } from '../../constants/api';
-import { getInteriorDatas } from '../../api/post';
+import { deletePost, getInteriorDatas } from '../../api/post';
+import { queryClient } from '../../api/queryClient';
 
 export const Post = () => {
   const [modalIsOpen, setModalOpen] = useState<boolean>(false);
@@ -54,7 +55,18 @@ export const Post = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = () => {};
+  const deletePostMutation = useMutation({
+    mutationFn: deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_HOME_INTERIOR] });
+    },
+  });
+
+  const handleDelete = (postId: number) => {
+    if (confirm('정말 삭제할까요?')) {
+      deletePostMutation.mutate({ type: selectedCategory, postId });
+    }
+  };
 
   const handleCardClick = (data: CardInfo) => {
     setModalOpen(true);
@@ -117,7 +129,7 @@ export const Post = () => {
               </CardActionArea>
               <CardActions>
                 <div className="button">
-                  <DeleteButton handleDelete={() => handleDelete()} />
+                  <DeleteButton handleDelete={() => handleDelete(data?.id)} />
                 </div>
               </CardActions>
             </Card>

@@ -2,13 +2,16 @@ import styled from 'styled-components';
 import { FaPlus } from 'react-icons/fa6';
 import Dropzone, { DropzoneState } from 'react-dropzone';
 import { useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { imageDeleteByFileName, imageUpload } from '../../api/image';
 
 interface DragDropProps {
+  category: string;
   handleFileList: (isSend: string[]) => void;
   initialImages?: string[];
 }
 
-export const DragDrop = ({ handleFileList, initialImages = [] }: DragDropProps) => {
+export const DragDrop = ({ category, handleFileList, initialImages = [] }: DragDropProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [previewImages, setPreviewImages] = useState<string[]>(initialImages);
 
@@ -20,17 +23,31 @@ export const DragDrop = ({ handleFileList, initialImages = [] }: DragDropProps) 
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleImageDrop = (files: File[]) => {
+  const imageUploadMutation = useMutation({
+    mutationFn: imageUpload,
+    onSuccess: () => {
+      console.log(previewImages);
+    },
+  });
+
+  const handleImageDrop = async (files: File[]) => {
     setIsDragging(true);
-    const newImages = files
-      .map((file) => {
-        if (file.type.startsWith('image/')) {
-          return URL.createObjectURL(file);
-        }
-        return null;
-      })
-      .filter((image) => image !== null) as string[];
-    setPreviewImages((prevImages) => (prevImages ? [...prevImages, ...newImages] : newImages));
+
+    try {
+      const uploadedUrls = await Promise.all(
+        files.map(async (file) => {
+          const imageUrl = await imageUploadMutation.mutateAsync({ file, storage: category });
+          return imageUrl;
+        })
+      );
+      setPreviewImages((prevImages) => [...prevImages, ...uploadedUrls]);
+    } catch (error) {
+      if (error?.error === 'Duplicate') {
+        alert('이미 존재하는 이미지입니다.');
+      }
+    } finally {
+      setIsDragging(false);
+    }
   };
 
   const handlePaste = (event: React.ClipboardEvent) => {
@@ -49,10 +66,17 @@ export const DragDrop = ({ handleFileList, initialImages = [] }: DragDropProps) 
     }
   };
 
-  const handleDelete = (index: number) => {
+  const deleteStorageImageMutation = useMutation({
+    mutationFn: imageDeleteByFileName,
+  });
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>, index: number, imageUrl: string) => {
+    e.preventDefault();
+    const fileName = imageUrl.split('/').pop() || '';
     const updatedImages = [...(previewImages || [])];
     updatedImages.splice(index, 1);
     setPreviewImages(updatedImages);
+    deleteStorageImageMutation.mutate({ fileName, storage: category });
   };
 
   return (
@@ -81,7 +105,7 @@ export const DragDrop = ({ handleFileList, initialImages = [] }: DragDropProps) 
                       <ImageContainer key={index} onClick={(e) => e.stopPropagation()}>
                         <img src={image} alt={`Dropped Preview ${index}`} />
                         {isHovered && (
-                          <DeleteButton onClick={() => handleDelete(index)}>
+                          <DeleteButton onClick={(e) => handleDelete(e, index, image)}>
                             <span role="img" aria-label="Delete">
                               ❌
                             </span>

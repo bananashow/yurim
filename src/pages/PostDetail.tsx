@@ -5,17 +5,29 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '../constants/api';
 import { getPostInfo } from '../api/post';
+import { useEffect, useState } from 'react';
+import { pyToSquareMeter } from '../utils/format';
 
 export const PostDetail = () => {
   const location = useLocation();
   const type = location.pathname.split('/')[1];
   const postId = location.pathname.split('/')[2];
+  const [textareaHeight, setTextareaHeight] = useState('auto');
 
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_POST_DETAIL],
     queryFn: () => getPostInfo({ type, postId }),
     select: (data) => data[0],
   });
+
+  useEffect(() => {
+    if (data && data.content) {
+      const textareaLineHeight = 16;
+      const lines = data.content.split('\n').length;
+      const newHeight = textareaLineHeight * lines + 'px';
+      setTextareaHeight(newHeight);
+    }
+  }, [data]);
 
   return (
     <PageLayout>
@@ -46,7 +58,9 @@ export const PostDetail = () => {
                 </tr>
                 <tr>
                   <td>AREA</td>
-                  <td>{data?.area}py [105㎡]</td>
+                  <td>
+                    {data?.area}py [{pyToSquareMeter(data?.area)}㎡]
+                  </td>
                 </tr>
                 <tr>
                   <td>KEYWORD</td>
@@ -59,7 +73,7 @@ export const PostDetail = () => {
 
           <div>
             <h3>{data?.title}</h3>
-            <p dangerouslySetInnerHTML={{ __html: data?.content }}></p>
+            <textarea value={data?.content} readOnly style={{ height: textareaHeight }}></textarea>
           </div>
         </InfoSection>
       </PostDetailContainer>
@@ -70,7 +84,7 @@ export const PostDetail = () => {
 const PostDetailContainer = styled.section`
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 48px;
 `;
 
@@ -102,6 +116,7 @@ const InfoSection = styled.article`
     display: flex;
     align-items: center;
     gap: 12px;
+    cursor: default;
   }
 
   hr {
@@ -110,11 +125,13 @@ const InfoSection = styled.article`
 
   h3 {
     margin-bottom: 18px;
+    cursor: default;
   }
 
   table {
     width: 100%;
     font-size: 14px;
+    cursor: default;
 
     td {
       height: 30px;
@@ -125,7 +142,13 @@ const InfoSection = styled.article`
     }
   }
 
-  p {
+  textarea {
+    width: 100%;
+    resize: none;
+    border: none;
     font-size: 14px;
+    outline: none;
+    cursor: default;
+    overflow: hidden;
   }
 `;

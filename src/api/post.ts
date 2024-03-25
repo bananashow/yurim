@@ -21,6 +21,16 @@ export const getPostInfo = async ({ type, postId }: { type: string; postId: stri
   return data;
 };
 
+export const addPost = async ({ type, formData }: { type: string; formData: EditCard }) => {
+  const table = getTable(type);
+  const { data, error } = await supabase.from(table).insert(formData);
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+  return data;
+};
+
 export const editPost = async ({
   type,
   postId,
@@ -32,6 +42,16 @@ export const editPost = async ({
 }) => {
   const table = getTable(type);
   const { data, error } = await supabase.from(table).update(updateData).match({ id: postId });
+  if (error) {
+    console.log(error);
+    throw error;
+  }
+  return data;
+};
+
+export const deletePost = async ({ type, postId }: { type: string; postId: number }) => {
+  const table = getTable(type);
+  const { data, error } = await supabase.from(table).delete().eq('id', postId);
   if (error) {
     console.log(error);
     throw error;

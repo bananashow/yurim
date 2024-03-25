@@ -3,10 +3,11 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { CarouselData } from '../../types/carousel';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
-import { addCarousel, editCarousel, imageUpload } from '../../api/carousel';
+import { addCarousel, editCarousel } from '../../api/carousel';
 import { FaPlus } from 'react-icons/fa6';
 import { queryClient } from '../../api/queryClient';
-import { QUERY_KEY } from '../../constants/api';
+import { QUERY_KEY, STORAGE } from '../../constants/api';
+import { imageUpload } from '../../api/image';
 
 interface EditModalProps {
   isOpen: boolean;
@@ -72,7 +73,7 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      imageUploadMutation.mutate(file);
+      imageUploadMutation.mutate({ file, storage: STORAGE.CAROUSEL });
     }
   };
 

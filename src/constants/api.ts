@@ -21,4 +21,7 @@ export const BUCKET = {
 
 export const STORAGE = {
   CAROUSEL: 'carousel',
+  HOME_INTERIOR: 'home_interior',
+  STORE_INTERIOR: 'store_interior',
+  POINT_INTERIOR: 'point_interior',
 } as const;

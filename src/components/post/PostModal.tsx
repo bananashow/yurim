@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { CardInfo } from '../../types/card';
 import { theme } from '../../styles/theme';
 import { DragDrop } from '../common/DragDrop';
-import { editPost } from '../../api/post';
+import { addPost, editPost } from '../../api/post';
 import { queryClient } from '../../api/queryClient';
 import { QUERY_KEY } from '../../constants/api';
 
@@ -28,7 +28,13 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
     setSendFileList(isSend);
   };
 
-  const AddMutation = useMutation({});
+  const addMutation = useMutation({
+    mutationFn: addPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_HOME_INTERIOR] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_POST_DETAIL] });
+    },
+  });
 
   const editMutation = useMutation({
     mutationFn: editPost,
@@ -42,6 +48,7 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
 
   const handleEditOrAdd = (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     const target = e.target as typeof e.target & {
       maintitle: { value: string };
       project: { value: string };
@@ -69,7 +76,7 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
       } else return false;
     } else {
       if (confirm('게시물을 등록할까요?')) {
-        AddMutation.mutate();
+        addMutation.mutate({ type: category, formData: formData });
       } else return false;
     }
     handleClose();
@@ -114,7 +121,7 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
           </DialogTitle>
           <DialogContent>
             <StyledImageContainer>
-              <DragDrop handleFileList={handleFileList} initialImages={selectedData.images} />
+              <DragDrop category={category} handleFileList={handleFileList} initialImages={selectedData.images} />
             </StyledImageContainer>
             <DialogContentText
               id="scroll-dialog-description"

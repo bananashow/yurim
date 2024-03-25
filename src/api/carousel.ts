@@ -1,8 +1,6 @@
-import { BUCKET, STORAGE, TABLE } from '../constants/api';
-import { formatImageFileName } from '../utils/format';
+import { TABLE } from '../constants/api';
 import supabase from './supabase';
 
-// -------------------------TABLE-------------------------
 export const getCarouselData = async () => {
   const { data, error } = await supabase.from(TABLE.CAROUSEL).select('*');
   if (error) {
@@ -54,32 +52,5 @@ export const deleteCarousel = async (carouselId: number) => {
     console.log(error);
     throw error;
   }
-  return data;
-};
-
-// -------------------------STORAGE-------------------------
-export const imageUpload = async (file: File) => {
-  const { data, error } = await supabase.storage.from(BUCKET.YURIM).upload(`${STORAGE.CAROUSEL}/${file.name}`, file, {
-    contentType: file.type,
-  });
-
-  if (error) {
-    console.error('Error uploading image:', error.message);
-    throw error;
-  }
-
-  const { data: urlData } = supabase.storage.from(BUCKET.YURIM).getPublicUrl(data.path);
-  return urlData.publicUrl;
-};
-
-export const imageDelete = async (url: string) => {
-  const fileName = formatImageFileName(url);
-
-  const { data, error } = await supabase.storage.from(BUCKET.YURIM).remove([`${STORAGE.CAROUSEL}/${fileName}`]);
-  if (error) {
-    console.error('Error uploading image:', error.message);
-    throw error;
-  }
-
   return data;
 };

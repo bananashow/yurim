@@ -66,8 +66,6 @@ export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps
     },
   });
 
-  console.log('newImageUrl', newImageUrl);
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {

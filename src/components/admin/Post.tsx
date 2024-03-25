@@ -18,7 +18,7 @@ import { PostModal } from '../post/PostModal';
 import { CardInfo } from '../../types/card';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY, TABLE } from '../../constants/api';
-import { getInteriorDatas } from '../../api/homeInterior';
+import { getInteriorDatas } from '../../api/post';
 
 export const Post = () => {
   const [modalIsOpen, setModalOpen] = useState<boolean>(false);

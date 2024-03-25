@@ -11,3 +11,14 @@ export interface CardInfo {
   images: string[];
   type?: 'edit' | 'add';
 }
+
+export interface EditCard {
+  main_title: string;
+  project: string;
+  site: string;
+  area: string;
+  keyword: string;
+  title: string;
+  content: string;
+  images: string[];
+}

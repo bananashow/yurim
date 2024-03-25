@@ -4,7 +4,7 @@ import { TfiHome } from 'react-icons/tfi';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '../constants/api';
-import { getPostInfo } from '../api/homeInterior';
+import { getPostInfo } from '../api/post';
 
 export const PostDetail = () => {
   const location = useLocation();

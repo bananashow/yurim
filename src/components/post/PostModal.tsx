@@ -1,9 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
 import { CardInfo } from '../../types/card';
 import { theme } from '../../styles/theme';
+import { DragDrop } from '../common/DragDrop';
+import { editPost } from '../../api/post';
+import { queryClient } from '../../api/queryClient';
+import { QUERY_KEY } from '../../constants/api';
 
 interface PostModalProps {
   isOpen: boolean;
@@ -13,17 +17,26 @@ interface PostModalProps {
 }
 
 export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: PostModalProps) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [newImageUrl, setNewImageUrl] = useState<string>('');
+  const [sendFileList, setSendFileList] = useState<string[]>(selectedData.images);
 
   const handleClose = () => {
     setModalOpen(false);
     deleteStorageImageMutation.mutate();
   };
 
+  const handleFileList = (isSend: string[]) => {
+    setSendFileList(isSend);
+  };
+
   const AddMutation = useMutation({});
 
-  const editMutation = useMutation({});
+  const editMutation = useMutation({
+    mutationFn: editPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_HOME_INTERIOR] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.GET_POST_DETAIL] });
+    },
+  });
 
   const deleteStorageImageMutation = useMutation({});
 
@@ -38,33 +51,29 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
       title: { value: string };
       content: { value: string };
     };
-    const mainTitle = target.maintitle.value;
-    const project = target.project.value;
-    const site = target.site.value;
-    const area = target.area.value;
-    const keyword = target.keyword.value;
-    const title = target.title.value;
-    const content = target.content.value;
+
+    const formData = {
+      main_title: target.maintitle.value,
+      project: target.project.value,
+      site: target.site.value,
+      area: target.area.value,
+      keyword: target.keyword.value,
+      title: target.title.value,
+      content: target.content.value,
+      images: sendFileList,
+    };
 
     if (selectedData.type === 'edit') {
-      editMutation.mutate();
+      if (confirm('정말 수정할까요?')) {
+        editMutation.mutate({ type: category, postId: selectedData.id, updateData: formData });
+      } else return false;
     } else {
-      AddMutation.mutate();
+      if (confirm('게시물을 등록할까요?')) {
+        AddMutation.mutate();
+      } else return false;
     }
     handleClose();
   };
-
-  // 이미지 파일
-
-  const descriptionElementRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    if (isOpen) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [isOpen]);
 
   let formatedCategory;
 
@@ -93,9 +102,9 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
       >
         <form onSubmit={handleEditOrAdd}>
           <DialogTitle id="scroll-dialog-title">
-            <h3 className="category" style={{ textAlign: 'right', fontSize: '14px', color: theme.colors.darkGreen }}>
+            <span className="category" style={{ textAlign: 'right', fontSize: '14px', color: theme.colors.darkGreen }}>
               {formatedCategory}
-            </h3>
+            </span>
             <MainTitleInput
               type="text"
               name="maintitle"
@@ -105,13 +114,11 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
           </DialogTitle>
           <DialogContent>
             <StyledImageContainer>
-              <StyledImage src={''} alt="Uploaded image" />
-              <input type="file" ref={fileInputRef} style={{ display: 'none' }} />
+              <DragDrop handleFileList={handleFileList} initialImages={selectedData.images} />
             </StyledImageContainer>
             <DialogContentText
               id="scroll-dialog-description"
               className="align"
-              ref={descriptionElementRef}
               tabIndex={-1}
               sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '24px' }}
             >
@@ -133,12 +140,11 @@ export const PostModal = ({ isOpen, setModalOpen, selectedData, category }: Post
             OVERVIEW
             <DialogContentText
               id="scroll-dialog-description"
-              ref={descriptionElementRef}
               tabIndex={-1}
               sx={{ display: 'grid', gap: '8px', marginTop: '8px' }}
             >
               <StyledInput defaultValue={selectedData.title} type="text" name="title" placeholder="제목을 입력하세요" />
-              <StyledTextArea defaultValue={selectedData.content} name="review" placeholder="내용을 입력하세요" />
+              <StyledTextArea defaultValue={selectedData.content} name="content" placeholder="내용을 입력하세요" />
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -192,6 +198,7 @@ const StyledImageContainer = styled.div`
   min-width: 500px;
   height: auto;
   cursor: pointer;
+  margin-bottom: 24px;
 
   .attachment {
     width: 100%;
@@ -205,9 +212,4 @@ const StyledImageContainer = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: auto;
 `;

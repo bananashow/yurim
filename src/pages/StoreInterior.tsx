@@ -4,7 +4,7 @@ import { InteriorCardList } from '../components/common/InteriorCardList';
 import { PyButtonGroup } from '../components/common/PyButtonGroup';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY, TABLE } from '../constants/api';
-import { getInteriorDatas } from '../api/homeInterior';
+import { getInteriorDatas } from '../api/post';
 
 export const StoreInterior = () => {
   const { data: interiorList } = useQuery({

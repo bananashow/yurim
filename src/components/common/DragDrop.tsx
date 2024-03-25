@@ -11,6 +11,10 @@ interface DragDropProps {
   initialImages?: string[];
 }
 
+interface ErrorResponse {
+  error: string; // 또는 오류에 대한 자세한 정보를 담는 타입
+}
+
 export const DragDrop = ({ category, handleFileList, initialImages = [] }: DragDropProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [previewImages, setPreviewImages] = useState<string[]>(initialImages);
@@ -42,7 +46,7 @@ export const DragDrop = ({ category, handleFileList, initialImages = [] }: DragD
       );
       setPreviewImages((prevImages) => [...prevImages, ...uploadedUrls]);
     } catch (error) {
-      if (error?.error === 'Duplicate') {
+      if ((error as ErrorResponse).error === 'Duplicate') {
         alert('이미 존재하는 이미지입니다.');
       }
     } finally {

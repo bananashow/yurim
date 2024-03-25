@@ -7,6 +7,7 @@ import { QUERY_KEY } from '../constants/api';
 import { getPostInfo } from '../api/post';
 import { useEffect, useState } from 'react';
 import { pyToSquareMeter } from '../utils/format';
+import { device } from '../styles/media';
 
 export const PostDetail = () => {
   const location = useLocation();
@@ -86,6 +87,11 @@ const PostDetailContainer = styled.section`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 48px;
+
+  @media ${device.tablet} {
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+  }
 `;
 
 const ImageSection = styled.article`
@@ -100,8 +106,11 @@ const ImageSection = styled.article`
     border: 1px solid ${(props) => props.theme.colors.gray};
     border-radius: 4px;
   }
-`;
 
+  @media ${device.tablet} {
+    order: 2;
+  }
+`;
 const InfoSection = styled.article`
   width: fit-content;
   min-width: 350px;
@@ -150,5 +159,11 @@ const InfoSection = styled.article`
     outline: none;
     cursor: default;
     overflow: hidden;
+  }
+
+  @media ${device.tablet} {
+    position: relative;
+    margin: 0 auto;
+    order: 1;
   }
 `;

@@ -23,7 +23,7 @@ export const PostDetail = () => {
 
   useEffect(() => {
     if (data && data.content) {
-      const textareaLineHeight = 16;
+      const textareaLineHeight = 25;
       const lines = data.content.split('\n').length;
       const newHeight = textareaLineHeight * lines + 'px';
       setTextareaHeight(newHeight);

@@ -29,9 +29,6 @@ export const DragDrop = ({ category, handleFileList, initialImages = [] }: DragD
 
   const imageUploadMutation = useMutation({
     mutationFn: imageUpload,
-    onSuccess: () => {
-      console.log(previewImages);
-    },
   });
 
   const handleImageDrop = async (files: File[]) => {

@@ -17,7 +17,7 @@ interface EditModalProps {
 
 export const EditModal = ({ isOpen, setModalOpen, selectedData }: EditModalProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [newImageUrl, setNewImageUrl] = useState<string>('');
+  const [newImageUrl, setNewImageUrl] = useState<string>(selectedData.img);
 
   const handleClose = () => {
     setModalOpen(false);
